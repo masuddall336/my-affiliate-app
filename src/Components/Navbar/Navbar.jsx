@@ -1,11 +1,18 @@
-
 import React, { useState } from "react";
+import { NavLink } from "react-router-dom";
 import { Menu, X, Search, ChevronDown } from "lucide-react";
+import { FaFire } from "react-icons/fa";
 
 const Navbar = () => {
+
   const [mobileMenu, setMobileMenu] = useState(false);
   const [megaMenu, setMegaMenu] = useState(false);
-  const [mobileCategories, setMobileCategories] = useState(false);
+
+  const [categoriesOpen, setCategoriesOpen] = useState(false);
+  const [electronicsOpen, setElectronicsOpen] = useState(false);
+  const [fashionOpen, setFashionOpen] = useState(false);
+  const [homeOpen, setHomeOpen] = useState(false);
+  const [beautyOpen, setBeautyOpen] = useState(false);
 
   let timeout;
 
@@ -19,143 +26,160 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="w-full bg-red shadow-md fixed top-0 z-50">
+    <nav className="w-full shadow-md fixed top-0 z-50 bg-[#16af93] text-white">
 
       <div className="max-w-7xl mx-auto px-4">
 
         <div className="flex items-center justify-between h-16">
 
-          {/* Logo */}
-          <h1 className="text-2xl font-bold text-orange-500">
+          <NavLink
+            to="/"
+            className="text-2xl font-bold hover:text-gray-100 transition duration-200"
+          >
             AffiMart
-          </h1>
+          </NavLink>
 
-          {/* Desktop Navigation */}
+          {/* Desktop Menu */}
           <div className="hidden lg:flex items-center space-x-8">
 
-            {/* Categories */}
             <div
               className="relative"
               onMouseEnter={handleEnter}
               onMouseLeave={handleLeave}
             >
-              <button className="flex items-center gap-1 font-medium text-[#fff] hover:text-orange-500">
+
+              <button className="flex items-center gap-1 hover:text-gray-100 transition duration-200">
                 Categories <ChevronDown size={16} />
               </button>
 
               {megaMenu && (
-                <div className="absolute left-0 mt-3 w-[850px]  shadow-2xl rounded-xl p-8 grid grid-cols-5 gap-6">
+                <div className="absolute left-0 top-full mt-3 w-[850px] bg-[#16af93] shadow-xl rounded-b-2xl p-8 grid grid-cols-5 gap-6">
 
                   <div>
                     <h3 className="font-semibold mb-3">Electronics</h3>
-                    <ul className="space-y-2 text-gray-600">
-                      <li className="hover:text-orange-500">Laptops</li>
-                      <li className="hover:text-orange-500">Phones</li>
-                      <li className="hover:text-orange-500">Headphones</li>
-                      <li className="hover:text-orange-500">Gaming</li>
+                    <ul className="space-y-2">
+                      <li><NavLink className="hover:underline" to="/electronics/laptops">Laptops</NavLink></li>
+                      <li><NavLink className="hover:underline" to="/electronics/phones">Smartphones</NavLink></li>
+                      <li><NavLink className="hover:underline" to="/electronics/headphones">Headphones</NavLink></li>
+                      <li><NavLink className="hover:underline" to="/electronics/gaming">Gaming</NavLink></li>
                     </ul>
                   </div>
 
                   <div>
                     <h3 className="font-semibold mb-3">Fashion</h3>
-                    <ul className="space-y-2 text-gray-600">
-                      <li className="hover:text-orange-500">Men Clothing</li>
-                      <li className="hover:text-orange-500">Women Clothing</li>
-                      <li className="hover:text-orange-500">Shoes</li>
-                      <li className="hover:text-orange-500">Bags</li>
+                    <ul className="space-y-2">
+                      <li><NavLink className="hover:underline" to="/fashion/men">Men Clothing</NavLink></li>
+                      <li><NavLink className="hover:underline" to="/fashion/women">Women Clothing</NavLink></li>
+                      <li><NavLink className="hover:underline" to="/fashion/shoes">Shoes</NavLink></li>
+                      <li><NavLink className="hover:underline" to="/fashion/bags">Bags</NavLink></li>
                     </ul>
                   </div>
 
                   <div>
                     <h3 className="font-semibold mb-3">Home</h3>
-                    <ul className="space-y-2 text-gray-600">
-                      <li className="hover:text-orange-500">Furniture</li>
-                      <li className="hover:text-orange-500">Cookware</li>
-                      <li className="hover:text-orange-500">Decor</li>
+                    <ul className="space-y-2">
+                      <li><NavLink className="hover:underline" to="/home/furniture">Furniture</NavLink></li>
+                      <li><NavLink className="hover:underline" to="/home/kitchen">Kitchen</NavLink></li>
+                      <li><NavLink className="hover:underline" to="/home/decor">Decor</NavLink></li>
                     </ul>
                   </div>
 
                   <div>
                     <h3 className="font-semibold mb-3">Beauty</h3>
-                    <ul className="space-y-2 text-gray-600">
-                      <li className="hover:text-orange-500">Makeup</li>
-                      <li className="hover:text-orange-500">Skincare</li>
-                      <li className="hover:text-orange-500">Hair Care</li>
+                    <ul className="space-y-2">
+                      <li><NavLink className="hover:underline" to="/beauty/makeup">Makeup</NavLink></li>
+                      <li><NavLink className="hover:underline" to="/beauty/skincare">Skincare</NavLink></li>
+                      <li><NavLink className="hover:underline" to="/beauty/haircare">Hair Care</NavLink></li>
                     </ul>
                   </div>
 
-                  <div className="bg-gray-50 rounded-lg p-4">
+                  <div>
                     <h3 className="font-semibold mb-3">Hot Deals</h3>
-                    <ul className="space-y-2 text-orange-500 font-medium">
-                      <li>🔥 Top Deals</li>
-                      <li>📈 Trending Products</li>
-                      <li>⭐ Best Sellers</li>
-                      <li>🎟 Coupons</li>
+                    <ul className="space-y-2">
+                      <li>
+                        <NavLink className="flex items-center gap-1 hover:underline" to="/top-deals">
+                          <FaFire className="text-orange-400"/>
+                          Top Deals
+                        </NavLink>
+                      </li>
+                      <li><NavLink className="hover:underline" to="/trending">Trending</NavLink></li>
+                      <li><NavLink className="hover:underline" to="/best-sellers">Best Sellers</NavLink></li>
+                      <li><NavLink className="hover:underline" to="/coupons">Coupons</NavLink></li>
                     </ul>
                   </div>
 
                 </div>
               )}
+
             </div>
 
-            <a className="hover:text-orange-500">Top Deals</a>
-            <a className="hover:text-orange-500">Trending</a>
-            <a className="hover:text-orange-500">Best Sellers</a>
-            <a className="hover:text-orange-500">Coupons</a>
+            <NavLink className="flex items-center gap-1 hover:text-gray-100 transition duration-200" to="/top-deals">
+              <FaFire className="text-orange-400"/>
+              Top Deals
+            </NavLink>
+
+            <NavLink className="hover:text-gray-100 transition duration-200" to="/trending">Trending</NavLink>
+            <NavLink className="hover:text-gray-100 transition duration-200" to="/best-sellers">Best Sellers</NavLink>
+            <NavLink className="hover:text-gray-100 transition duration-200" to="/coupons">Coupons</NavLink>
 
           </div>
 
           {/* Search */}
-          <div className="hidden md:flex items-center bg-gray-100 rounded-full px-4 py-2 w-80">
-            <Search size={18} />
+          <div className="hidden md:flex items-center bg-[#0f7462] rounded px-4 py-2 w-72 hover:bg-[#0c5e4f] transition duration-200">
+            <Search size={18}/>
             <input
               type="text"
               placeholder="Search products..."
-              className="bg-transparent outline-none px-2 w-full"
+              className="bg-transparent outline-none px-2 w-full text-white placeholder-gray-200"
             />
           </div>
 
-          {/* Login Register */}
-          <div className="hidden md:flex space-x-3">
-            <button className="px-4 py-2 hover:text-orange-500">
-              Login
-            </button>
+          {/* Login / Signup */}
+          <div className="hidden lg:flex items-center space-x-4">
 
-            <button className="px-5 py-2 bg-orange-500 text-white rounded-xl">
-              Register
-            </button>
+            <NavLink
+              to="/login"
+              className="px-4 py-2 border rounded-lg hover:bg-white hover:text-[#16af93] transition duration-200"
+            >
+              Login
+            </NavLink>
+
+            <NavLink
+              to="/signup"
+              className="px-4 py-2 border rounded-lg hover:bg-white hover:text-[#16af93] transition duration-200"
+            >
+              Sign Up
+            </NavLink>
+
           </div>
 
-          {/* Mobile Menu Button */}
-          <div className="lg:hidden">
-            <button onClick={() => setMobileMenu(true)}>
-              <Menu size={28} />
+          <div className="lg:hidden ">
+            <button
+              onClick={() => setMobileMenu(true)}
+              className="hover:text-gray-200 transition"
+            >
+              <Menu size={28}/>
             </button>
           </div>
 
         </div>
       </div>
 
-      {/* MOBILE FULL SCREEN MENU */}
+      {/* Mobile Menu */}
       {mobileMenu && (
-        <div className="fixed inset-0 bg-white z-50 overflow-y-auto">
+        <div className="fixed inset-0 bg-[#16af93] z-50 overflow-y-auto">
 
-          {/* Header */}
           <div className="flex justify-between items-center p-5 border-b">
-            <h2 className="text-xl font-bold text-orange-500">
-              Menu
-            </h2>
-
+            <h2 className="text-xl font-bold">Menu</h2>
             <button onClick={() => setMobileMenu(false)}>
-              <X size={28} />
+              <X size={28}/>
             </button>
           </div>
 
           <div className="p-6 space-y-6">
 
-            {/* Search */}
             <div className="flex items-center border rounded-lg px-3 py-2">
-              <Search size={18} />
+              <Search size={18}/>
               <input
                 type="text"
                 placeholder="Search products..."
@@ -163,53 +187,142 @@ const Navbar = () => {
               />
             </div>
 
-            {/* Categories Accordion */}
+            {/* Categories */}
             <div>
+
               <button
-                onClick={() => setMobileCategories(!mobileCategories)}
-                className="flex justify-between w-full font-semibold text-lg"
+                onClick={() => setCategoriesOpen(!categoriesOpen)}
+                className="flex justify-between w-full font-semibold hover:text-[#16af93]"
               >
                 Categories
-                <ChevronDown />
+                <ChevronDown/>
               </button>
 
-              {mobileCategories && (
-                <ul className="mt-3 space-y-2 text-gray-600">
-                  <li>Electronics</li>
-                  <li>Fashion</li>
-                  <li>Home & Kitchen</li>
-                  <li>Beauty</li>
-                </ul>
+              {categoriesOpen && (
+                <div className="mt-4 space-y-4">
+
+                  {/* Electronics */}
+                  <div>
+                    <button
+                      onClick={() => setElectronicsOpen(!electronicsOpen)}
+                      className="flex justify-between w-full hover:text-[#16af93]"
+                    >
+                      Electronics
+                      <ChevronDown size={18}/>
+                    </button>
+
+                    {electronicsOpen && (
+                      <ul className="ml-4 mt-2 space-y-2">
+                        <li><NavLink className="hover:text-[#16af93]" to="/electronics/laptops">Laptops</NavLink></li>
+                        <li><NavLink className="hover:text-[#16af93]" to="/electronics/phones">Smartphones</NavLink></li>
+                        <li><NavLink className="hover:text-[#16af93]" to="/electronics/headphones">Headphones</NavLink></li>
+                        <li><NavLink className="hover:text-[#16af93]" to="/electronics/gaming">Gaming</NavLink></li>
+                      </ul>
+                    )}
+                  </div>
+
+                  {/* Fashion */}
+                  <div>
+                    <button
+                      onClick={() => setFashionOpen(!fashionOpen)}
+                      className="flex justify-between w-full hover:text-[#16af93]"
+                    >
+                      Fashion
+                      <ChevronDown size={18}/>
+                    </button>
+
+                    {fashionOpen && (
+                      <ul className="ml-4 mt-2 space-y-2">
+                        <li><NavLink className="hover:text-[#16af93]" to="/fashion/men">Men Clothing</NavLink></li>
+                        <li><NavLink className="hover:text-[#16af93]" to="/fashion/women">Women Clothing</NavLink></li>
+                        <li><NavLink className="hover:text-[#16af93]" to="/fashion/shoes">Shoes</NavLink></li>
+                        <li><NavLink className="hover:text-[#16af93]" to="/fashion/bags">Bags</NavLink></li>
+                      </ul>
+                    )}
+                  </div>
+
+                  {/* Home */}
+                  <div>
+                    <button
+                      onClick={() => setHomeOpen(!homeOpen)}
+                      className="flex justify-between w-full hover:text-[#16af93]"
+                    >
+                      Home
+                      <ChevronDown size={18}/>
+                    </button>
+
+                    {homeOpen && (
+                      <ul className="ml-4 mt-2 space-y-2">
+                        <li><NavLink className="hover:text-[#16af93]" to="/home/furniture">Furniture</NavLink></li>
+                        <li><NavLink className="hover:text-[#16af93]" to="/home/kitchen">Kitchen</NavLink></li>
+                        <li><NavLink className="hover:text-[#16af93]" to="/home/decor">Decor</NavLink></li>
+                      </ul>
+                    )}
+                  </div>
+
+                  {/* Beauty */}
+                  <div>
+                    <button
+                      onClick={() => setBeautyOpen(!beautyOpen)}
+                      className="flex justify-between w-full hover:text-[#16af93]"
+                    >
+                      Beauty
+                      <ChevronDown size={18}/>
+                    </button>
+
+                    {beautyOpen && (
+                      <ul className="ml-4 mt-2 space-y-2">
+                        <li><NavLink className="hover:text-[#16af93]" to="/beauty/makeup">Makeup</NavLink></li>
+                        <li><NavLink className="hover:text-[#16af93]" to="/beauty/skincare">Skincare</NavLink></li>
+                        <li><NavLink className="hover:text-[#16af93]" to="/beauty/haircare">Hair Care</NavLink></li>
+                      </ul>
+                    )}
+                  </div>
+
+                </div>
               )}
+
             </div>
 
             {/* Explore */}
-            <div className="space-y-3">
-              <h3 className="font-semibold text-lg">Explore</h3>
-
-              <ul className="space-y-2 text-gray-700">
-                <li>🔥 Top Deals</li>
-                <li>📈 Trending Products</li>
-                <li>⭐ Best Sellers</li>
-                <li>🎟 Coupons</li>
+            <div>
+              <ul className="space-y-3">
+                <li>
+                  <NavLink className="flex items-center gap-1 hover:text-[#16af93]" to="/top-deals">
+                    <FaFire className="text-orange-500"/>
+                    Top Deals
+                  </NavLink>
+                </li>
+                <li><NavLink className="hover:text-[#16af93]" to="/trending">Trending</NavLink></li>
+                <li><NavLink className="hover:text-[#16af93]" to="/best-sellers">Best Sellers</NavLink></li>
+                <li><NavLink className="hover:text-[#16af93]" to="/coupons">Coupons</NavLink></li>
               </ul>
             </div>
 
-            {/* Auth Buttons */}
-            <div className="pt-4 space-y-3">
-              <button className="w-full border py-3 rounded-lg">
-                Login
-              </button>
+            {/* Mobile Login */}
+            <div className="flex gap-4 pt-4 border-t">
 
-              <button className="w-full bg-orange-500 text-white py-3 rounded-lg">
-                Register
-              </button>
+              <NavLink
+                to="/login"
+                className="flex-1 text-center border py-2 rounded-lg hover:bg-[#16af93] hover:text-white transition"
+              >
+                Login
+              </NavLink>
+
+              <NavLink
+                to="/signup"
+                className="flex-1 text-center border py-2 rounded-lg hover:bg-[#16af93] hover:text-white transition"
+              >
+                Sign Up
+              </NavLink>
+
             </div>
 
           </div>
 
         </div>
       )}
+
     </nav>
   );
 };
